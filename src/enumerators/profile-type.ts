@@ -1,0 +1,6 @@
+enum ProfileType {
+  ADMIN = 1,
+  USER = 2,
+}
+
+export default ProfileType;

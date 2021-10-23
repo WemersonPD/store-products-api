@@ -1,0 +1,56 @@
+<mjml>
+  <mj-head>
+    <mj-attributes>
+      <mj-all name="poppins" href="https://fonts.googleapis.com/css?family=Poppins" />
+      <mj-text font-weight="400" font-size="16px" color="#000" line-height="24px" />
+      <mj-section background-color="#F15B28" padding-top="10px" padding-bottom="10px" />
+      <mj-wrapper background-color="#ffffff" full-width="full-width" />
+      <mj-class name="mobile"></mj-class>
+      <mj-button border-radius="7px" font-weight="bold" />
+    </mj-attributes>
+    <mj-style> .right { display: block !important; } .left { display: block !important; } @media (min-width:480px) { .right { float: right !important; } .left { float: left !important; } } </mj-style>
+  </mj-head>
+  <mj-body>
+    <mj-wrapper padding="25px 5px 15px">
+
+      <!-- TITLE/IMAGE -->
+      <mj-section border-radius="10px 10px 0px 0px" padding-left="15px" padding-right="15px" padding-top="50px">
+        <mj-column>
+          <mj-text line-height="30px" font-weight="bold" font-size="35px" color="#141414" align="left">
+            <p align="center">Recuperação de senha</p>
+          </mj-text>
+        </mj-column>
+      </mj-section>
+      <!-- SUBTITLE -->
+      <mj-section padding-left="15px" padding-right="15px">
+        <mj-column>
+          <mj-text align="left">
+            <p>Olá, para continuar o acesso ao <strong>Adapta</strong>, segue abaixo seu código para redefinir a senha.
+            </p>
+          </mj-text>
+        </mj-column>
+      </mj-section>
+
+      <!-- CODIGO DE RECUPERAÇÃO -->
+      <mj-section text-align="center" padding-left="10px" padding-right="10px">
+        <mj-column width="250px" background-color="#262626" border-radius="5px">
+          <mj-text align="center" color="#EBEBEB" font-size="17px"><strong>Código: {recoveryToken}</strong></mj-text>
+        </mj-column>
+      </mj-section>
+
+      <!-- DIVIDER -->
+      <mj-section>
+        <mj-column>
+          <mj-divider border-width="1px" border-style="solid" border-color="black" padding="0 20px" />
+        </mj-column>
+      </mj-section>
+      <!-- FOOTER -->
+      <mj-section border-radius="0px 0px 10px 10px">
+        <mj-column padding="0">
+          <mj-text font-size="11px" align="center" line-height="16px">Copyright © Adapta - All Rights Reserved.</mj-text>
+        </mj-column>
+      </mj-section>
+
+    </mj-wrapper>
+  </mj-body>
+</mjml>

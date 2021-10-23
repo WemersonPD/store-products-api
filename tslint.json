@@ -1,0 +1,89 @@
+{
+  "extends": [
+    "tslint:recommended",
+    "tslint-config-airbnb"
+  ],
+  "linterOptions": {
+    "exclude": [
+      "dist",
+      "src/setup.ts",
+      "dist/*.js",
+      "tslint.json"
+    ]
+  },
+  "rules": {
+    "variable-name": false,
+    "import-name": false,
+    "array-type": false,
+    "object-literal-sort-keys": false,
+    "arrow-return-shorthand": true,
+    "class-name": true,
+    "indent": [
+      true,
+      "spaces",
+      2
+    ],
+    "eofline": false,
+    "interface-name": [
+      true,
+      "always-prefix"
+    ],
+    "max-classes-per-file": [
+      true,
+      1
+    ],
+    "no-duplicate-imports": true,
+    "ordered-imports": false,
+    "semicolon": [
+      true,
+      "always"
+    ],
+    "no-console": [
+      false
+    ],
+    "no-duplicate-super": true,
+    "no-empty": [
+      true,
+      "allow-empty-catch",
+      "allow-empty-functions"
+    ],
+    "no-empty-interface": true,
+    "no-return-await": true,
+    "no-var-keyword": true,
+    "one-variable-per-declaration": [
+      true,
+      "ignore-for-loop"
+    ],
+    "quotemark": [
+      true,
+      "single"
+    ],
+    "return-undefined": true,
+    "typedef": [
+      true,
+      "arrow-call-signature",
+      "arrow-parameter",
+      "call-signature",
+      "member-variable-declaration",
+      "parameter",
+      "property-declaration",
+      "variable-declaration"
+    ],
+    "unnecessary-constructor": true,
+    "whitespace": [
+      true,
+      "check-branch",
+      "check-decl",
+      "check-module",
+      "check-operator",
+      "check-postbrace",
+      "check-preblock",
+      "check-rest-spread",
+      "check-separator",
+      "check-type",
+      "check-type-operator",
+      "check-typecast"
+    ],
+    "esModuleInterop": true
+  }
+}

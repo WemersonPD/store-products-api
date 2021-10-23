@@ -1,0 +1,16 @@
+FROM public.ecr.aws/bitnami/node:12.20.0
+
+LABEL version="1.0" \
+      maintainer="Wemerson Patrick <wemerson.silva@mblabs.com.br>"
+
+WORKDIR /usr/src
+
+COPY package*.json ./
+
+RUN npm i
+
+COPY . .
+
+EXPOSE 4547
+
+CMD ["node", "dist/index.js"]

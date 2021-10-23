@@ -1,0 +1,53 @@
+image: atlassian/default-image:2
+
+pipelines:
+  branches:
+    develop:
+      - step:
+          name: "UPLOAD ZIP"
+          deployment: Staging
+          services:
+            - docker
+          caches:
+            - pip
+          script:
+            # install Amazon CLI
+            - apt-get update && apt-get install -y python3-pip
+            - apt-get update && apt-get install -y zip
+            - pip3 install rsa
+            - pip3 install awscli
+            # config aws
+            - aws configure set aws_access_key_id "${AWS_ACCESS_KEY_ID}"
+            - aws configure set aws_secret_access_key "${AWS_SECRET_ACCESS_KEY}"
+            - sts=$(aws sts assume-role --role-session-name="MBLABS-DEPLOY" --role-arn="$EXTERNAL_ROLE_ARN" --output text --query='Credentials.[join(`=`, [`AWS_ACCESS_KEY_ID`, AccessKeyId]),join(`=`, [`AWS_SECRET_ACCESS_KEY`, SecretAccessKey]),join(`=`, [`AWS_SESSION_TOKEN`, SessionToken])]')
+            - eval "export $sts"
+            # get project dependencies
+            - rm -rf .git
+            - zip -r application.zip ./
+            - aws s3 cp ./application.zip s3://${S3_BUCKET_NAME}/backend-stage-application.zip
+            - aws codebuild start-build --project-name "${CODE_BUILD_PROJECT}"
+    master:
+      - step:
+          name: "UPLOAD ZIP"
+          deployment: Production
+          services:
+            - docker
+          caches:
+            - pip
+          script:
+            # install Amazon CLI
+            - apt-get update && apt-get install -y python3-pip
+            - apt-get update && apt-get install -y zip
+            - pip3 install rsa
+            - pip3 install awscli
+            # config aws
+            - aws configure set aws_access_key_id "${AWS_ACCESS_KEY_ID}"
+            - aws configure set aws_secret_access_key "${AWS_SECRET_ACCESS_KEY}"
+            - sts=$(aws sts assume-role --role-session-name="MBLABS-DEPLOY" --role-arn="$EXTERNAL_ROLE_ARN" --output text --query='Credentials.[join(`=`, [`AWS_ACCESS_KEY_ID`, AccessKeyId]),join(`=`, [`AWS_SECRET_ACCESS_KEY`, SecretAccessKey]),join(`=`, [`AWS_SESSION_TOKEN`, SessionToken])]')
+            - eval "export $sts"
+            # get project dependencies
+            - zip -r application.zip ./ -x '*.git*'
+            - aws s3 cp ./application.zip s3://${S3_BUCKET_NAME}/backend-prod-application.zip
+            - aws codebuild start-build --project-name "${CODE_BUILD_PROJECT}"
+
+

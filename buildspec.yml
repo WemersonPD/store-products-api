@@ -1,0 +1,17 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      nodejs: 12
+  pre_build:
+    commands:
+      - eval $(aws ecr get-login --no-include-email --region $AWS_REGION | sed 's;https://;;g')
+  build:
+    commands:
+      - npm i -g typescript
+      - npm i
+      - npm run build
+      - docker build --no-cache -t $REPOSITORY_URI:latest -f Dockerfile.api .
+  post_build:
+    commands:
+      - docker push $REPOSITORY_URI:latest
